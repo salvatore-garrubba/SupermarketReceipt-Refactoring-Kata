@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 
@@ -5,8 +6,8 @@ namespace SupermarketReceipt
 {
     public class ShoppingCart
     {
-        private readonly List<ProductQuantity> _items = new List<ProductQuantity>();
-        private readonly Dictionary<Product, double> _productQuantities = new Dictionary<Product, double>();
+        private readonly List<ProductQuantity> _items = new();
+        private readonly Dictionary<Product, decimal> _productQuantities = new();
         private static readonly CultureInfo Culture = CultureInfo.CreateSpecificCulture("en-GB");
 
 
@@ -17,11 +18,11 @@ namespace SupermarketReceipt
 
         public void AddItem(Product product)
         {
-            AddItemQuantity(product, 1.0);
+            AddItemQuantity(product, 1.0m);
         }
 
 
-        public void AddItemQuantity(Product product, double quantity)
+        public void AddItemQuantity(Product product, decimal quantity)
         {
             _items.Add(new ProductQuantity(product, quantity));
             if (_productQuantities.ContainsKey(product))
@@ -58,7 +59,7 @@ namespace SupermarketReceipt
                         {
                             var total = offer.Argument * (quantityAsInt / x) + quantityAsInt % 2 * unitPrice;
                             var discountN = unitPrice * quantity - total;
-                            discount = new Discount(p, "2 for " + PrintPrice(offer.Argument), -discountN);
+                            discount = new Discount(p, "2 for " + PrintPrice(offer.Argument), Math.Round(-discountN, 2));
                         }
                     }
 
@@ -67,14 +68,14 @@ namespace SupermarketReceipt
                     if (offer.OfferType == SpecialOfferType.ThreeForTwo && quantityAsInt > 2)
                     {
                         var discountAmount = quantity * unitPrice - (numberOfXs * 2 * unitPrice + quantityAsInt % 3 * unitPrice);
-                        discount = new Discount(p, "3 for 2", -discountAmount);
+                        discount = new Discount(p, "3 for 2", Math.Round(-discountAmount, 2));
                     }
 
-                    if (offer.OfferType == SpecialOfferType.TenPercentDiscount) discount = new Discount(p, offer.Argument + "% off", -quantity * unitPrice * offer.Argument / 100.0);
+                    if (offer.OfferType == SpecialOfferType.TenPercentDiscount) discount = new Discount(p, PrintPrice(offer.Argument) + "% off", Math.Round(-quantity * unitPrice * offer.Argument / 100.0m, 2));
                     if (offer.OfferType == SpecialOfferType.FiveForAmount && quantityAsInt >= 5)
                     {
                         var discountTotal = unitPrice * quantity - (offer.Argument * numberOfXs + quantityAsInt % 5 * unitPrice);
-                        discount = new Discount(p, x + " for " + PrintPrice(offer.Argument), -discountTotal);
+                        discount = new Discount(p, x + " for " + PrintPrice(offer.Argument), Math.Round(-discountTotal, 2));
                     }
 
                     if (discount != null)
@@ -83,7 +84,7 @@ namespace SupermarketReceipt
             }
         }
         
-        private string PrintPrice(double price)
+        private string PrintPrice(decimal price)
         {
             return price.ToString("N2", Culture);
         }

@@ -5,14 +5,14 @@ namespace SupermarketReceipt
     public class Teller
     {
         private readonly SupermarketCatalog _catalog;
-        private readonly Dictionary<Product, Offer> _offers = new Dictionary<Product, Offer>();
+        private readonly Dictionary<Product, Offer> _offers = new();
 
         public Teller(SupermarketCatalog catalog)
         {
             _catalog = catalog;
         }
 
-        public void AddSpecialOffer(SpecialOfferType offerType, Product product, double argument)
+        public void AddSpecialOffer(SpecialOfferType offerType, Product product, decimal argument)
         {
             _offers[product] = new Offer(offerType, product, argument);
         }
