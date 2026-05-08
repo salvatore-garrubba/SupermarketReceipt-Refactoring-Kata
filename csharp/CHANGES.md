@@ -28,3 +28,6 @@ I've added a few unit tests to cover the discounts, based on obsarvable behaviou
 
 ## Changed from double to decimal
 I decided to refactor the code to use `decimal` and round to 2 decimal places. This ensures that all prices, total and discounts are handles with cent precision, preventing floating-point issues in monetary calculations. 
+
+## Initial implementation of the strategy pattern
+The `ShoppingCart` class is handling the logic to calculate discount in a wrong way, it should not be its responsibility. I created an interface called `IOfferStrategy` to make a contract for calculating the discount and an abstract class `OfferStrategy` in order to us shared methods like `PrintPrice()`. This is the first part of the refactoring for the strategy pattern, the logic is still in the wrong place. I also moved all the classes in a separate file, to make them visible at the solution level.

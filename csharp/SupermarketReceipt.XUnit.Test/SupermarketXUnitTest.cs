@@ -1,3 +1,4 @@
+using SupermarketReceipt.Catalogs;
 using Assert = Xunit.Assert;
 
 namespace SupermarketReceipt.XUnit.Test
@@ -19,7 +20,7 @@ namespace SupermarketReceipt.XUnit.Test
         
         public SupermarketXUnitTest()
         {
-            SupermarketCatalog catalog = new FakeCatalog();
+            var catalog = new FakeCatalog();
             _teller = new Teller(catalog);
             _cart = new ShoppingCart();
             _cart = new ShoppingCart();

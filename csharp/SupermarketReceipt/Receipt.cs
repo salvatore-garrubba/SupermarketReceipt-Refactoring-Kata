@@ -1,55 +1,38 @@
 using System;
 using System.Collections.Generic;
 
-namespace SupermarketReceipt
+namespace SupermarketReceipt;
+
+public class Receipt
 {
-    public class Receipt
+    private readonly List<Discount> _discounts = new();
+    private readonly List<ReceiptItem> _items = new();
+
+    public decimal GetTotalPrice()
     {
-        private readonly List<Discount> _discounts = new();
-        private readonly List<ReceiptItem> _items = new();
-
-        public decimal GetTotalPrice()
-        {
-            var total = 0.0m;
-            foreach (var item in _items) total += item.TotalPrice;
-            foreach (var discount in _discounts) total += discount.DiscountAmount;
-            return Math.Round(total, 2);
-        }
-
-        public void AddProduct(Product p, decimal quantity, decimal price, decimal totalPrice)
-        {
-            _items.Add(new ReceiptItem(p, quantity, price, totalPrice));
-        }
-
-        public List<ReceiptItem> GetItems()
-        {
-            return new List<ReceiptItem>(_items);
-        }
-
-        public void AddDiscount(Discount discount)
-        {
-            _discounts.Add(discount);
-        }
-
-        public List<Discount> GetDiscounts()
-        {
-            return _discounts;
-        }
+        var total = 0.0m;
+        foreach (var item in _items) total += item.TotalPrice;
+        foreach (var discount in _discounts) total += discount.DiscountAmount;
+        return Math.Round(total, 2);
     }
 
-    public class ReceiptItem
+    public void AddProduct(Product p, decimal quantity, decimal price, decimal totalPrice)
     {
-        public ReceiptItem(Product p, decimal quantity, decimal price, decimal totalPrice)
-        {
-            Product = p;
-            Quantity = quantity;
-            Price = price;
-            TotalPrice = totalPrice;
-        }
+        _items.Add(new ReceiptItem(p, quantity, price, totalPrice));
+    }
 
-        public Product Product { get; }
-        public decimal Price { get; }
-        public decimal TotalPrice { get; }
-        public decimal Quantity { get; }
+    public List<ReceiptItem> GetItems()
+    {
+        return new List<ReceiptItem>(_items);
+    }
+
+    public void AddDiscount(Discount discount)
+    {
+        _discounts.Add(discount);
+    }
+
+    public List<Discount> GetDiscounts()
+    {
+        return _discounts;
     }
 }

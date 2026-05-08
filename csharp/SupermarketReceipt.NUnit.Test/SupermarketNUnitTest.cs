@@ -1,7 +1,6 @@
-using System.Collections.Generic;
-using NUnit;
 using NUnit.Framework;
 using NUnit.Framework.Legacy;
+using SupermarketReceipt.Catalogs;
 
 namespace SupermarketReceipt.NUnit.Test
 {
@@ -11,7 +10,7 @@ namespace SupermarketReceipt.NUnit.Test
         public void TenPercentDiscount()
         {
             // ARRANGE
-            SupermarketCatalog catalog = new FakeCatalog();
+            ISupermarketCatalog catalog = new FakeCatalog();
             var toothbrush = new Product("toothbrush", ProductUnit.Each);
             catalog.AddProduct(toothbrush, 0.99m);
             var apples = new Product("apples", ProductUnit.Kilo);
