@@ -25,3 +25,6 @@ Similar issue with the NUnit test project, which was also using `xunit.runner.vi
 ## Added unit tests to cover simple scenarios
 I'm more familiar with XUnit, so I decided to use this project and not NUnit.
 I've added a few unit tests to cover the discounts, based on obsarvable behaviour rather than internal logic. I've noticed that a few tests were initially failing, because of the use of `double` instead of `decimal`. In short, it's way better to use `decimal` because it uses base-10 floating point instead of binary (which cannot represent most decimal fractions exactly), but for now I decided to keep it like this and refactor later on. For now, a quick `Math.Round` with 2 fractional digits should be enough.
+
+## Changed from double to decimal
+I decided to refactor the code to use `decimal` and round to 2 decimal places. This ensures that all prices, total and discounts are handles with cent precision, preventing floating-point issues in monetary calculations. 
