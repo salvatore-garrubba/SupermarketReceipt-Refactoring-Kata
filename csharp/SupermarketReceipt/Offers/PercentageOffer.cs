@@ -8,15 +8,21 @@ public class PercentageOffer : OfferStrategy, IOfferStrategy
 
     public PercentageOffer(decimal percent)
     {
+        ArgumentOutOfRangeException.ThrowIfNegativeOrZero(percent);
+        ArgumentOutOfRangeException.ThrowIfGreaterThanOrEqual(percent, 100);
+
         _percent = percent;
     }
     
     public Discount? Calculate(Product product, decimal unitPrice, decimal quantity)
     {
         ArgumentNullException.ThrowIfNull(product);
+        ArgumentOutOfRangeException.ThrowIfNegativeOrZero(unitPrice);
+        ArgumentOutOfRangeException.ThrowIfNegativeOrZero(quantity);
         
-        var discountAmount = Math.Round(quantity * unitPrice * _percent / 100.0m, 2);
-        var discount = new Discount(product, PrintPrice(_percent) + "% off", discountAmount);
+        var discountAmount = quantity * unitPrice * _percent / 100.0m;
+        
+        var discount = new Discount(product, PrintPercentage(_percent) + "% off", Math.Round(-discountAmount, 2));
 
         return discount;
     }

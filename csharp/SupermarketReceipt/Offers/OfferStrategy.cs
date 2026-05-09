@@ -10,4 +10,11 @@ public abstract class OfferStrategy
     {
         return price.ToString("N2", Culture);
     }
+    
+    public static string PrintPercentage(decimal percent)
+    {
+        return percent % 1 == 0 
+            ? percent.ToString("N0", Culture)
+            : percent.ToString("N2", Culture);
+    }
 }

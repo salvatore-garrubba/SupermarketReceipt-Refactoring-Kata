@@ -66,7 +66,7 @@ namespace SupermarketReceipt.XUnit.Test
             Assert.Single(receipt.GetDiscounts());
             var discount = receipt.GetDiscounts()[0];
             Assert.Equal(_rice, discount.Product);
-            Assert.Equal("10.00% off", discount.Description);
+            Assert.Equal("10% off", discount.Description);
             Assert.Equal(-0.50m, discount.DiscountAmount);
             Assert.Single(receipt.GetItems());
             var receiptItem = receipt.GetItems()[0];
@@ -287,7 +287,7 @@ namespace SupermarketReceipt.XUnit.Test
             Assert.Equal(2, receipt.GetDiscounts().Count);
             var appleDiscount = receipt.GetDiscounts()[0];
             Assert.Equal(_apples, appleDiscount.Product);
-            Assert.Equal("10.00% off", appleDiscount.Description);
+            Assert.Equal("10% off", appleDiscount.Description);
             Assert.Equal(-0.4m, appleDiscount.DiscountAmount);
             
             var riceDiscount = receipt.GetDiscounts()[1];

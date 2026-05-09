@@ -31,3 +31,8 @@ I decided to refactor the code to use `decimal` and round to 2 decimal places. T
 
 ## Initial implementation of the strategy pattern
 The `ShoppingCart` class is handling the logic to calculate discount in a wrong way, it should not be its responsibility. I created an interface called `IOfferStrategy` to make a contract for calculating the discount and an abstract class `OfferStrategy` in order to us shared methods like `PrintPrice()`. This is the first part of the refactoring for the strategy pattern, the logic is still in the wrong place. I also moved all the classes in a separate file, to make them visible at the solution level.
+
+## Final implementation of the strategy pattern
+The `Offer` class is not in charge of the logic to intialize the `IOfferStrategy` and exposes a public method `CalculateDiscount()` that calculate the `Discount`. This logic has been removed from the `ShoppingCart`, which simply call the `offer.CalculateDiscount()` method. 
+I've added basic validation to the classes handling the logic for the offer, like negative values and null parameters. 
+I've also added unit tests for the classed that implement the `IOfferStrategy` interface, still missing a few but will add later on.
