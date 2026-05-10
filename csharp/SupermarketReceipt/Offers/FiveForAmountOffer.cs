@@ -13,7 +13,7 @@ public class FiveForAmountOffer : OfferStrategy, IOfferStrategy
         _amount = amount;
     }
     
-    public Discount? Calculate(Product product, decimal unitPrice, decimal quantity)
+    public DiscountResult Calculate(Product product, decimal unitPrice, decimal quantity)
     {
         ArgumentNullException.ThrowIfNull(product);
         ArgumentOutOfRangeException.ThrowIfNegativeOrZero(unitPrice);
@@ -21,7 +21,7 @@ public class FiveForAmountOffer : OfferStrategy, IOfferStrategy
 
         if (quantity < 5)
         {
-            return null;
+            return DiscountResult.None;
         }
         
         var timesApplied = (int) quantity / 5;
@@ -29,11 +29,11 @@ public class FiveForAmountOffer : OfferStrategy, IOfferStrategy
         var discountAmount = quantity * unitPrice - timesApplied * _amount - reminder * unitPrice;
         if (discountAmount <= 0)
         {
-            return null;
+            return DiscountResult.None;
         }
             
         var discount = new Discount(product, "5 for " + PrintPrice(_amount), Math.Round(-discountAmount, 2));
         
-        return discount;
+        return DiscountResult.Applied(discount);
     }
 }

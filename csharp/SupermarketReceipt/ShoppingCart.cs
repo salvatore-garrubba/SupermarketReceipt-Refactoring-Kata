@@ -63,13 +63,13 @@ public class ShoppingCart
 
             var unitPrice = catalog.GetUnitPrice(product);
 
-            var discount = offer.CalculateDiscount(unitPrice, quantity);
-            if (discount == null)
+            var discountResult = offer.CalculateDiscount(unitPrice, quantity);
+            if (!discountResult.HasDiscount)
             {
                 continue;
             }
             
-            receipt.AddDiscount(discount);
+            receipt.AddDiscount(discountResult.Value);
         }
     }
 }

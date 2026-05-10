@@ -54,10 +54,10 @@ public class ThreeForTwoOfferTests
         const decimal quantity = 2m;
 
         // Act
-        var discount = offer.Calculate(product, unitPrice, quantity);
+        var discountResult = offer.Calculate(product, unitPrice, quantity);
 
         // Assert
-        Assert.Null(discount);
+        Assert.False(discountResult.HasDiscount);
     }
 
     [Fact]
@@ -70,13 +70,12 @@ public class ThreeForTwoOfferTests
         const decimal quantity = 3m;
 
         // Act
-        var discount = offer.Calculate(product, unitPrice, quantity);
+        var discountResult = offer.Calculate(product, unitPrice, quantity);
 
         // Assert
-        Assert.NotNull(discount);
-        Assert.Equal(product, discount.Product);
-        Assert.Equal("3 for 2", discount.Description);
-        Assert.Equal(-1.00m, discount.DiscountAmount);
+        Assert.Equal(product, discountResult.Value.Product);
+        Assert.Equal("3 for 2", discountResult.Value.Description);
+        Assert.Equal(-1.00m, discountResult.Value.DiscountAmount);
     }
 
     [Fact]
@@ -89,11 +88,10 @@ public class ThreeForTwoOfferTests
         const decimal quantity = 3.5m;
 
         // Act
-        var discount = offer.Calculate(product, unitPrice, quantity);
+        var discountResult = offer.Calculate(product, unitPrice, quantity);
 
         // Assert
-        Assert.NotNull(discount);
-        Assert.Equal(-1.00m, discount.DiscountAmount);
+        Assert.Equal(-1.00m, discountResult.Value.DiscountAmount);
     }
 
     [Fact]
@@ -106,10 +104,10 @@ public class ThreeForTwoOfferTests
         const decimal quantity = 2.9m;
 
         // Act
-        var discount = offer.Calculate(product, unitPrice, quantity);
+        var discountResult = offer.Calculate(product, unitPrice, quantity);
 
         // Assert
-        Assert.Null(discount);
+        Assert.False(discountResult.HasDiscount);
     }
 
     [Fact]
@@ -122,11 +120,10 @@ public class ThreeForTwoOfferTests
         const decimal quantity = 6.7m;
 
         // Act
-        var discount = offer.Calculate(product, unitPrice, quantity);
+        var discountResult = offer.Calculate(product, unitPrice, quantity);
 
         // Assert
-        Assert.NotNull(discount);
-        Assert.Equal(-2.00m, discount.DiscountAmount);
+        Assert.Equal(-2.00m, discountResult.Value.DiscountAmount);
     }
 
     [Fact]
@@ -139,11 +136,10 @@ public class ThreeForTwoOfferTests
         const decimal quantity = 3m;
 
         // Act
-        var discount = offer.Calculate(product, unitPrice, quantity);
+        var discountResult = offer.Calculate(product, unitPrice, quantity);
 
         // Assert
-        Assert.NotNull(discount);
-        Assert.Equal(-0.99m, discount.DiscountAmount);
+        Assert.Equal(-0.99m, discountResult.Value.DiscountAmount);
     }
 
     [Fact]
@@ -156,11 +152,10 @@ public class ThreeForTwoOfferTests
         const decimal quantity = 3m;
 
         // Act
-        var discount = offer.Calculate(product, unitPrice, quantity);
+        var discountResult = offer.Calculate(product, unitPrice, quantity);
 
         // Assert
-        Assert.NotNull(discount);
-        Assert.Equal(-0.01m, discount.DiscountAmount);
+        Assert.Equal(-0.01m, discountResult.Value.DiscountAmount);
     }
 
     [Fact]
@@ -173,11 +168,10 @@ public class ThreeForTwoOfferTests
         const decimal quantity = 3m;
 
         // Act
-        var discount = offer.Calculate(product, unitPrice, quantity);
+        var discountResult = offer.Calculate(product, unitPrice, quantity);
 
         // Assert
-        Assert.NotNull(discount);
-        Assert.Equal(-99.99m, discount.DiscountAmount);
+        Assert.Equal(-99.99m, discountResult.Value.DiscountAmount);
     }
 
     [Fact]
@@ -190,11 +184,10 @@ public class ThreeForTwoOfferTests
         const decimal quantity = 6m;
 
         // Act
-        var discount = offer.Calculate(product, unitPrice, quantity);
+        var discountResult = offer.Calculate(product, unitPrice, quantity);
 
         // Assert
-        Assert.NotNull(discount);
-        Assert.Equal(-2.00m, discount.DiscountAmount);
+        Assert.Equal(-2.00m, discountResult.Value.DiscountAmount);
     }
 
     [Fact]
@@ -207,11 +200,10 @@ public class ThreeForTwoOfferTests
         const decimal quantity = 7m;
 
         // Act
-        var discount = offer.Calculate(product, unitPrice, quantity);
+        var discountResult = offer.Calculate(product, unitPrice, quantity);
 
         // Assert
-        Assert.NotNull(discount);
-        Assert.Equal(-2.00m, discount.DiscountAmount);
+        Assert.Equal(-2.00m, discountResult.Value.DiscountAmount);
     }
 
     [Fact]
@@ -224,11 +216,10 @@ public class ThreeForTwoOfferTests
         const decimal quantity = 9m;
 
         // Act
-        var discount = offer.Calculate(product, unitPrice, quantity);
+        var discountResult = offer.Calculate(product, unitPrice, quantity);
 
         // Assert
-        Assert.NotNull(discount);
-        Assert.Equal(-3.00m, discount.DiscountAmount);
+        Assert.Equal(-3.00m, discountResult.Value.DiscountAmount);
     }
 
     [Fact]
@@ -241,10 +232,10 @@ public class ThreeForTwoOfferTests
         const decimal quantity = 2m;
 
         // Act
-        var discount = offer.Calculate(product, unitPrice, quantity);
+        var discountResult = offer.Calculate(product, unitPrice, quantity);
 
         // Assert
-        Assert.Null(discount);
+        Assert.False(discountResult.HasDiscount);
     }
 
     [Fact]
@@ -257,10 +248,9 @@ public class ThreeForTwoOfferTests
         const decimal quantity = 3m;
 
         // Act
-        var discount = offer.Calculate(product, unitPrice, quantity);
+        var discountResult = offer.Calculate(product, unitPrice, quantity);
 
         // Assert
-        Assert.NotNull(discount);
-        Assert.Equal(-1.00m, discount.DiscountAmount);
+        Assert.Equal(-1.00m, discountResult.Value.DiscountAmount);
     }
 }

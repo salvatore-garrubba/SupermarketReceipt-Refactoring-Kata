@@ -14,7 +14,7 @@ public class PercentageOffer : OfferStrategy, IOfferStrategy
         _percent = percent;
     }
     
-    public Discount? Calculate(Product product, decimal unitPrice, decimal quantity)
+    public DiscountResult Calculate(Product product, decimal unitPrice, decimal quantity)
     {
         ArgumentNullException.ThrowIfNull(product);
         ArgumentOutOfRangeException.ThrowIfNegativeOrZero(unitPrice);
@@ -23,11 +23,11 @@ public class PercentageOffer : OfferStrategy, IOfferStrategy
         var discountAmount = Math.Round(quantity * unitPrice * _percent / 100.0m, 2);
         if (discountAmount == 0)
         {
-            return null;
+            return DiscountResult.None;
         }
         
         var discount = new Discount(product, PrintPercentage(_percent) + "% off", - discountAmount);
 
-        return discount;
+        return DiscountResult.Applied(discount);
     }
 }

@@ -30,7 +30,7 @@ public class Offer
         };
     }
 
-    public Discount? CalculateDiscount(decimal unitPrice, decimal quantity)
+    public DiscountResult CalculateDiscount(decimal unitPrice, decimal quantity)
     {
         return _offerStrategy.Calculate(_product, unitPrice, quantity);
     }

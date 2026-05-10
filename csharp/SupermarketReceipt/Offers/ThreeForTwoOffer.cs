@@ -4,7 +4,7 @@ namespace SupermarketReceipt.Offers;
 
 public class ThreeForTwoOffer : IOfferStrategy
 {
-    public Discount? Calculate(Product product, decimal unitPrice, decimal quantity)
+    public DiscountResult Calculate(Product product, decimal unitPrice, decimal quantity)
     {
         ArgumentNullException.ThrowIfNull(product);
         ArgumentOutOfRangeException.ThrowIfNegativeOrZero(unitPrice);
@@ -12,18 +12,18 @@ public class ThreeForTwoOffer : IOfferStrategy
 
         if (quantity < 3)
         {
-            return null;
+            return DiscountResult.None;
         }
 
         var timesApplied = (int)(quantity / 3);
         var discountAmount = timesApplied * unitPrice;
         if (discountAmount <= 0)
         {
-            return null;
+            return DiscountResult.None;
         }
         
         var discount = new Discount(product, "3 for 2", Math.Round(-discountAmount, 2));
 
-        return discount;
+        return DiscountResult.Applied(discount);
     }
 }

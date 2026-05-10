@@ -63,10 +63,10 @@ public class FiveForAmountOfferTests
         const decimal quantity = 5m;
 
         // Act
-        var discount = sut.Calculate(product, unitPrice, quantity);
+        var discountResult = sut.Calculate(product, unitPrice, quantity);
 
         // Assert
-        Assert.Null(discount);
+        Assert.False(discountResult.HasDiscount);
     }
     
     [Fact]
@@ -79,13 +79,13 @@ public class FiveForAmountOfferTests
         const int quantity = 5;
 
         // Act
-        var discount = sut.Calculate(product, unitPrice, quantity);
+        var discountResult = sut.Calculate(product, unitPrice, quantity);
 
         // Assert
-        Assert.NotNull(discount);
-        Assert.Equal(product, discount.Product);
-        Assert.Equal("5 for 4.00", discount.Description);
-        Assert.Equal(-1, discount.DiscountAmount);
+        Assert.True(discountResult.HasDiscount);
+        Assert.Equal(product, discountResult.Value.Product);
+        Assert.Equal("5 for 4.00", discountResult.Value.Description);
+        Assert.Equal(-1, discountResult.Value.DiscountAmount);
     }
 
     [Fact]
@@ -98,10 +98,10 @@ public class FiveForAmountOfferTests
         const int quantity = 4;
 
         // Act
-        var discount = sut.Calculate(product, unitPrice, quantity);
+        var discountResult = sut.Calculate(product, unitPrice, quantity);
 
         // Assert
-        Assert.Null(discount);
+        Assert.False(discountResult.HasDiscount);
     }
 
     [Fact]
@@ -114,11 +114,10 @@ public class FiveForAmountOfferTests
         const decimal quantity = 5.5m;
 
         // Act
-        var discount = sut.Calculate(product, unitPrice, quantity);
+        var discountResult = sut.Calculate(product, unitPrice, quantity);
 
         // Assert
-        Assert.NotNull(discount);
-        Assert.Equal(-1.00m, discount.DiscountAmount);
+        Assert.Equal(-1.00m, discountResult.Value.DiscountAmount);
     }
 
     [Fact]
@@ -131,10 +130,10 @@ public class FiveForAmountOfferTests
         const decimal quantity = 4.99m;
 
         // Act
-        var discount = sut.Calculate(product, unitPrice, quantity);
+        var discountResult = sut.Calculate(product, unitPrice, quantity);
 
         // Assert
-        Assert.Null(discount);
+        Assert.False(discountResult.HasDiscount);
     }
 
     [Fact]
@@ -147,11 +146,10 @@ public class FiveForAmountOfferTests
         const decimal quantity = 10.3m;
 
         // Act
-        var discount = sut.Calculate(product, unitPrice, quantity);
+        var discountResult = sut.Calculate(product, unitPrice, quantity);
 
         // Assert
-        Assert.NotNull(discount);
-        Assert.Equal(-2.00m, discount.DiscountAmount);
+        Assert.Equal(-2.00m, discountResult.Value.DiscountAmount);
     }
 
     [Fact]
@@ -164,11 +162,10 @@ public class FiveForAmountOfferTests
         const decimal quantity = 5m;
 
         // Act
-        var discount = sut.Calculate(product, unitPrice, quantity);
+        var discountResult = sut.Calculate(product, unitPrice, quantity);
 
         // Assert
-        Assert.NotNull(discount);
-        Assert.Equal(-0.95m, discount.DiscountAmount);
+        Assert.Equal(-0.95m, discountResult.Value.DiscountAmount);
     }
 
     [Fact]
@@ -181,11 +178,10 @@ public class FiveForAmountOfferTests
         const decimal quantity = 5m;
 
         // Act
-        var discount = sut.Calculate(product, unitPrice, quantity);
+        var discountResult = sut.Calculate(product, unitPrice, quantity);
 
         // Assert
-        Assert.NotNull(discount);
-        Assert.Equal(-0.01m, discount.DiscountAmount);
+        Assert.Equal(-0.01m, discountResult.Value.DiscountAmount);
     }
 
     [Fact]
@@ -198,11 +194,10 @@ public class FiveForAmountOfferTests
         const decimal quantity = 5m;
 
         // Act
-        var discount = sut.Calculate(product, unitPrice, quantity);
+        var discountResult = sut.Calculate(product, unitPrice, quantity);
 
         // Assert
-        Assert.NotNull(discount);
-        Assert.Equal(-99.95m, discount.DiscountAmount);
+        Assert.Equal(-99.95m, discountResult.Value.DiscountAmount);
     }
 
     [Fact]
@@ -215,12 +210,11 @@ public class FiveForAmountOfferTests
         const decimal quantity = 5m;
 
         // Act
-        var discount = sut.Calculate(product, unitPrice, quantity);
+        var discountResult = sut.Calculate(product, unitPrice, quantity);
 
         // Assert
-        Assert.NotNull(discount);
-        Assert.Equal("5 for 3.49", discount.Description);
-        Assert.Equal(-1.46m, discount.DiscountAmount);
+        Assert.Equal("5 for 3.49", discountResult.Value.Description);
+        Assert.Equal(-1.46m, discountResult.Value.DiscountAmount);
     }
 
     [Fact]
@@ -233,11 +227,10 @@ public class FiveForAmountOfferTests
         const decimal quantity = 10m;
 
         // Act
-        var discount = sut.Calculate(product, unitPrice, quantity);
+        var discountResult = sut.Calculate(product, unitPrice, quantity);
 
         // Assert
-        Assert.NotNull(discount);
-        Assert.Equal(-2.00m, discount.DiscountAmount);
+        Assert.Equal(-2.00m, discountResult.Value.DiscountAmount);
     }
 
     [Fact]
@@ -250,11 +243,10 @@ public class FiveForAmountOfferTests
         const decimal quantity = 13m;
 
         // Act
-        var discount = sut.Calculate(product, unitPrice, quantity);
+        var discountResult = sut.Calculate(product, unitPrice, quantity);
 
         // Assert
-        Assert.NotNull(discount);
-        Assert.Equal(-2.00m, discount.DiscountAmount);
+        Assert.Equal(-2.00m, discountResult.Value.DiscountAmount);
     }
 
     [Fact]
@@ -267,10 +259,10 @@ public class FiveForAmountOfferTests
         const decimal quantity = 4m;
 
         // Act
-        var discount = sut.Calculate(product, unitPrice, quantity);
+        var discountResult = sut.Calculate(product, unitPrice, quantity);
 
         // Assert
-        Assert.Null(discount);
+        Assert.False(discountResult.HasDiscount);
     }
 
     [Fact]
@@ -283,11 +275,10 @@ public class FiveForAmountOfferTests
         const decimal quantity = 5m;
 
         // Act
-        var discount = sut.Calculate(product, unitPrice, quantity);
+        var discountResult = sut.Calculate(product, unitPrice, quantity);
 
         // Assert
-        Assert.NotNull(discount);
-        Assert.Equal(-1.00m, discount.DiscountAmount);
+        Assert.Equal(-1.00m, discountResult.Value.DiscountAmount);
     }
 
     [Fact]
@@ -313,12 +304,11 @@ public class FiveForAmountOfferTests
         const decimal quantity = 5m;
 
         // Act
-        var discount = sut.Calculate(product, unitPrice, quantity);
+        var discountResult = sut.Calculate(product, unitPrice, quantity);
 
         // Assert
-        Assert.NotNull(discount);
-        Assert.Equal("5 for 3.99", discount.Description);
-        Assert.Equal(-0.96m, discount.DiscountAmount);
+        Assert.Equal("5 for 3.99", discountResult.Value.Description);
+        Assert.Equal(-0.96m, discountResult.Value.DiscountAmount);
     }
 
     [Fact]
@@ -331,10 +321,9 @@ public class FiveForAmountOfferTests
         const decimal quantity = 26m;
 
         // Act
-        var discount = sut.Calculate(product, unitPrice, quantity);
+        var discountResult = sut.Calculate(product, unitPrice, quantity);
 
         // Assert
-        Assert.NotNull(discount);
-        Assert.Equal(-5.00m, discount.DiscountAmount);
+        Assert.Equal(-5.00m, discountResult.Value.DiscountAmount);
     }
 }

@@ -41,3 +41,8 @@ I've also added unit tests for the classed that implement the `IOfferStrategy` i
 I've added all the remaining unit tests for the missing classes that implement the `IOfferStrategy` interface. 
 I've also added very basic argument checking for all the other classes.
 Furthermore, I've made the `Product` name case invariant, adding proper unit tests to cover this scenario.
+
+## Better handling of null values
+My last step is to handle in a better way the `null` values.
+I've added a `DiscountResult` discriminated union using a readonly struct to better handling the result of `Calculate` method in the `IOfferStrategy` interface.
+This struct has basically 2 values: `None` if no discount was found, and `Value` if the discount was correctly found.
