@@ -16,7 +16,7 @@ public class Product
     public string Name { get; }
     public ProductUnit Unit { get; }
 
-    public override bool Equals(object obj)
+    public override bool Equals(object? obj)
     {
         var product = obj as Product;
         return product != null &&

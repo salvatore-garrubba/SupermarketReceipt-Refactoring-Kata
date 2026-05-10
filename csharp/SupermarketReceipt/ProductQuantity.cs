@@ -4,13 +4,13 @@ namespace SupermarketReceipt;
 
 public class ProductQuantity
 {
-    public ProductQuantity(Product product, decimal weight)
+    public ProductQuantity(Product product, decimal quantity)
     {
         ArgumentNullException.ThrowIfNull(product);
-        ArgumentOutOfRangeException.ThrowIfNegativeOrZero(weight);
+        ArgumentOutOfRangeException.ThrowIfNegativeOrZero(quantity);
         
         Product = product;
-        Quantity = weight;
+        Quantity = quantity;
     }
 
     public Product Product { get; }

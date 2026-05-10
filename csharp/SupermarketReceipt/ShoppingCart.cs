@@ -6,12 +6,18 @@ namespace SupermarketReceipt;
 
 public class ShoppingCart
 {
-    private readonly List<ProductQuantity> _items = new();
     private readonly Dictionary<Product, decimal> _productQuantities = new();
 
     public List<ProductQuantity> GetItems()
     {
-        return new List<ProductQuantity>(_items);
+        var productQuantities = new List<ProductQuantity>();
+        
+        foreach (var product in _productQuantities.Keys)
+        {
+            productQuantities.Add(new ProductQuantity(product, _productQuantities[product]));
+        }
+        
+        return productQuantities;
     }
 
     public void AddItem(Product product)
@@ -24,9 +30,8 @@ public class ShoppingCart
     public void AddItemQuantity(Product product, decimal quantity)
     {
         ArgumentNullException.ThrowIfNull(product);
-        ArgumentNullException.ThrowIfNull(quantity);
+        ArgumentOutOfRangeException.ThrowIfNegativeOrZero(quantity);
         
-        _items.Add(new ProductQuantity(product, quantity));
         if (_productQuantities.ContainsKey(product))
         {
             var newAmount = _productQuantities[product] + quantity;

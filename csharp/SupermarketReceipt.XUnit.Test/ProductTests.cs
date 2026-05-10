@@ -130,7 +130,7 @@ public class ProductTests
         var product = new Product("Apple", ProductUnit.Each);
 
         // Act
-        var result = product.Equals(null);
+        var result = product.Equals(null!);
 
         // Assert
         Assert.False(result);
