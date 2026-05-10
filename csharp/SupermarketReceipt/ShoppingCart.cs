@@ -12,9 +12,9 @@ public class ShoppingCart
     {
         var productQuantities = new List<ProductQuantity>();
         
-        foreach (var product in _productQuantities.Keys)
+        foreach (var (product, quantity) in _productQuantities)
         {
-            productQuantities.Add(new ProductQuantity(product, _productQuantities[product]));
+            productQuantities.Add(new ProductQuantity(product, quantity));
         }
         
         return productQuantities;
@@ -45,15 +45,23 @@ public class ShoppingCart
 
     public void HandleOffers(Receipt receipt, Dictionary<Product, Offer> offers, ISupermarketCatalog catalog)
     {
-        foreach (var p in _productQuantities.Keys)
+        ArgumentNullException.ThrowIfNull(receipt);
+        ArgumentNullException.ThrowIfNull(offers);
+        ArgumentNullException.ThrowIfNull(catalog);
+
+        if (offers.Count == 0)
         {
-            var quantity = _productQuantities[p];
-            if (!offers.TryGetValue(p, out var offer))
+            return;
+        }
+        
+        foreach (var (product, quantity) in _productQuantities)
+        {
+            if (!offers.TryGetValue(product, out var offer))
             {
                 continue;
             }
 
-            var unitPrice = catalog.GetUnitPrice(p);
+            var unitPrice = catalog.GetUnitPrice(product);
 
             var discount = offer.CalculateDiscount(unitPrice, quantity);
             if (discount == null)
