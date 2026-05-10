@@ -36,3 +36,8 @@ The `ShoppingCart` class is handling the logic to calculate discount in a wrong 
 The `Offer` class is not in charge of the logic to intialize the `IOfferStrategy` and exposes a public method `CalculateDiscount()` that calculate the `Discount`. This logic has been removed from the `ShoppingCart`, which simply call the `offer.CalculateDiscount()` method. 
 I've added basic validation to the classes handling the logic for the offer, like negative values and null parameters. 
 I've also added unit tests for the classed that implement the `IOfferStrategy` interface, still missing a few but will add later on.
+
+## Added remaining unit tests for strategy
+I've added all the remaining unit tests for the missing classes that implement the `IOfferStrategy` interface. 
+I've also added very basic argument checking for all the other classes.
+Furthermore, I've made the `Product` name case invariant, adding proper unit tests to cover this scenario.

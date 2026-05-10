@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using SupermarketReceipt.Catalogs;
 
@@ -15,11 +16,16 @@ public class ShoppingCart
 
     public void AddItem(Product product)
     {
+        ArgumentNullException.ThrowIfNull(product);
+        
         AddItemQuantity(product, 1.0m);
     }
     
     public void AddItemQuantity(Product product, decimal quantity)
     {
+        ArgumentNullException.ThrowIfNull(product);
+        ArgumentNullException.ThrowIfNull(quantity);
+        
         _items.Add(new ProductQuantity(product, quantity));
         if (_productQuantities.ContainsKey(product))
         {

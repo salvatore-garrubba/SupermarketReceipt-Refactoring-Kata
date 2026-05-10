@@ -20,9 +20,13 @@ public class PercentageOffer : OfferStrategy, IOfferStrategy
         ArgumentOutOfRangeException.ThrowIfNegativeOrZero(unitPrice);
         ArgumentOutOfRangeException.ThrowIfNegativeOrZero(quantity);
         
-        var discountAmount = quantity * unitPrice * _percent / 100.0m;
+        var discountAmount = Math.Round(quantity * unitPrice * _percent / 100.0m, 2);
+        if (discountAmount == 0)
+        {
+            return null;
+        }
         
-        var discount = new Discount(product, PrintPercentage(_percent) + "% off", Math.Round(-discountAmount, 2));
+        var discount = new Discount(product, PrintPercentage(_percent) + "% off", - discountAmount);
 
         return discount;
     }

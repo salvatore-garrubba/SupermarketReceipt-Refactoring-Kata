@@ -18,6 +18,11 @@ public class Receipt
 
     public void AddProduct(Product p, decimal quantity, decimal price, decimal totalPrice)
     {
+        ArgumentNullException.ThrowIfNull(p);
+        ArgumentOutOfRangeException.ThrowIfNegativeOrZero(quantity);
+        ArgumentOutOfRangeException.ThrowIfNegativeOrZero(price);
+        ArgumentOutOfRangeException.ThrowIfNegativeOrZero(totalPrice);
+        
         _items.Add(new ReceiptItem(p, quantity, price, totalPrice));
     }
 

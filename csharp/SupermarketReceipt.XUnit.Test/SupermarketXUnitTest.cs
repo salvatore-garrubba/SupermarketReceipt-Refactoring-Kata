@@ -81,7 +81,7 @@ namespace SupermarketReceipt.XUnit.Test
         {
             // ARRANGE
             _cart.AddItemQuantity(_toothbrush, 3);
-            _teller.AddSpecialOffer(SpecialOfferType.ThreeForTwo, _toothbrush, 0.0m);
+            _teller.AddSpecialOffer(SpecialOfferType.ThreeForTwo, _toothbrush, 2 * ToothbrushPrice);
 
             // ACT
             var receipt = _teller.ChecksOutArticlesFrom(_cart);

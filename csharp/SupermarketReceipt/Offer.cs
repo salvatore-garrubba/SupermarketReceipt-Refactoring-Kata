@@ -13,6 +13,9 @@ public class Offer
 
     public Offer(SpecialOfferType offerType, Product product, decimal amount)
     {
+        ArgumentNullException.ThrowIfNull(product);
+        ArgumentOutOfRangeException.ThrowIfNegativeOrZero(amount);
+        
         OfferType = offerType;
         Amount = amount;
         _product = product;

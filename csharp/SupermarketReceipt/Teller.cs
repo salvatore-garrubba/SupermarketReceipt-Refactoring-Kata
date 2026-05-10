@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using SupermarketReceipt.Catalogs;
 
@@ -13,9 +14,12 @@ public class Teller
         _catalog = catalog;
     }
 
-    public void AddSpecialOffer(SpecialOfferType offerType, Product product, decimal argument)
+    public void AddSpecialOffer(SpecialOfferType offerType, Product product, decimal amount)
     {
-        _offers[product] = new Offer(offerType, product, argument);
+        ArgumentNullException.ThrowIfNull(product);
+        ArgumentOutOfRangeException.ThrowIfNegativeOrZero(amount);
+        
+        _offers[product] = new Offer(offerType, product, amount);
     }
 
     public Receipt ChecksOutArticlesFrom(ShoppingCart theCart)
